@@ -1,0 +1,8 @@
+#!/Users/kamalnath/Documents/BDAT/1003_Business_Processes/MRP/Cricket_Analysis_Dashboard/cricket_dash/bin/python3.11
+# -*- coding: utf-8 -*-
+import re
+import sys
+from pygments.cmdline import main
+if __name__ == '__main__':
+    sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
+    sys.exit(main())
