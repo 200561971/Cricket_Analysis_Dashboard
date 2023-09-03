@@ -1,4 +1,4 @@
 /cricket_dash/
 /.ipynb_checkpoints
 /.jupyter
-
+**/__pycache__/
