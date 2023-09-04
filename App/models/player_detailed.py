@@ -14,7 +14,7 @@ class PlayerDetailed:
         self.player_batting_fielding_stats : [PlayerBattingFieldingStats] = player_batting_fielding_stats
     
     @staticmethod
-    def split_career_stats(self,career_stats_json):
+    def split_career_stats(career_stats_json):
         bowling_stats_json,batting_stats_json = [],[]
         for stat in career_stats_json:
             stat_type = str(stat.get('type'))
@@ -40,7 +40,7 @@ class PlayerDetailed:
         return player_bowling_stats
 
     @staticmethod
-    def parse_batting_stats(self,batting_stats_json)->[PlayerBattingFieldingStats] :
+    def parse_batting_stats(batting_stats_json)->[PlayerBattingFieldingStats] :
         if not batting_stats_json:
             return []
         
@@ -53,13 +53,13 @@ class PlayerDetailed:
 
 
     @staticmethod
-    def from_json(self,player_json):
+    def from_json(player_json):
         player_profile_json = player_json.get('player')
         career_stats_json = player_json.get('content').get('careerAverages').get('stats')
         
         player_profile = PlayerProfile.from_json(player_profile_json)
         
-        stats = self.split_career_stats(career_stats_json)
+        stats = PlayerDetailed.split_career_stats(career_stats_json)
         
         bowling_stats_json = stats.get('bowling')
         batting_stats_json = stats.get('batting')

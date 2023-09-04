@@ -4,7 +4,7 @@ from repository import Repository
 
 def run():
     teams = Repository()
-    for team in teams.db.teams:
+    for team in teams.teams_db.teams:
         players_count = len(team.players_db.players_shor_db)
         print(team.name, " has ", players_count, ' records')
 
