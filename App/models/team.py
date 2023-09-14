@@ -14,7 +14,7 @@ class Team:
         self.slug= slug
         self.abbr = abbr
         self.flag_url = Team.parse_flag_url(flag_url)
-        self.players_db = players_db
+        
 
     @staticmethod
     def parse_flag_url(flag_url):

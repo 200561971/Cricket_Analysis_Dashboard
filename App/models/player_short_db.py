@@ -2,8 +2,9 @@ import requests
 import json
 from utils.constants import Urls
 from models.player_short import PlayerShort
+from models.csv_writer import CsvWriter
+
 class PlayersShortDatabase:
-    
     def __init__(self,team_id):
         self.team_id = team_id
         self.players_short_db = []
@@ -54,4 +55,11 @@ class PlayersShortDatabase:
             records = player_data.get('results')
             self.parse_player_data_from_records(records)
         print(f"Gathered ids of {len(self.players_short_db)} of {self.total_players} players")
-        
+
+    def write_csv(self,file_name:str,headers = []):
+         csv_writer = CsvWriter(file_name)
+         if headers != []:
+            headers = headers
+            csv_writer.write_header(headers)    
+         player_rows = [[player.id, player.slug, player.get_url()] for player in self.players_short_db]
+         csv_writer.write_rows(player_rows)
