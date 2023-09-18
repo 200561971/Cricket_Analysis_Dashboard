@@ -1,3 +1,4 @@
+from utils.constants import Constants
 from models.player_profile import PlayerProfile
 from models.player_bowling_stats import PlayerBowlingStats
 from models.player_batting_fielding_stats import PlayerBattingFieldingStats
@@ -75,14 +76,14 @@ class PlayerDetailed:
     
 
     @staticmethod
-    def write_profile_header(file_name:str = 'player_profiles.csv',header:list = None):
+    def write_profile_header(file_name:str = Constants.PLAYER_PROFILE_FILE_NAME,header:list = None):
         csv_writer = CsvWriter(file_name)
         if not header:
             header = ['id','long_name','gender','image_url','headshot_image_url','dob','dod','country_team_id']
         
         csv_writer.write_header(header=header)
 
-    def write_profile_to_csv(self, file_name:str = 'player_profiles.csv'):
+    def write_profile_to_csv(self, file_name:str = Constants.PLAYER_PROFILE_FILE_NAME):
         csv_writer = CsvWriter(file_name)
         profile_data = [
             self.player_profile.id,
@@ -97,7 +98,7 @@ class PlayerDetailed:
         csv_writer.write_row(profile_data)
 
     @staticmethod
-    def write_bowling_stats_header(file_name:str = 'bowling_stats.csv', header:list = None):
+    def write_bowling_stats_header(file_name:str = Constants.PLAYER_BOWLING_STATS_FILE_NAME, header:list = None):
         csv_writer = CsvWriter(file_path=file_name)
         if not header:
             header = [
@@ -110,7 +111,7 @@ class PlayerDetailed:
         csv_writer.write_header(header=header)
 
     
-    def write_bowling_stats_to_csv(self,file_name:str = 'bowling_stats.csv'):
+    def write_bowling_stats_to_csv(self,file_name:str = Constants.PLAYER_BOWLING_STATS_FILE_NAME):
         csv_writer = CsvWriter(file_path=file_name)
         player_bowling_stats = [
             [self.player_profile.id, bowling_stats.match_format, bowling_stats.matches,
@@ -124,7 +125,7 @@ class PlayerDetailed:
         csv_writer.write_rows(player_bowling_stats)
 
     @staticmethod
-    def write_batting_stats_header(file_name:str = 'batting_stats.csv', header:list = None):
+    def write_batting_stats_header(file_name:str = Constants.PLAYER_BATTING_STATS_FILE_NAME, header:list = None):
         csv_writer = CsvWriter(file_path=file_name)
         if not header:
             header = [
@@ -137,7 +138,7 @@ class PlayerDetailed:
 
         csv_writer.write_header(header=header)
 
-    def write_batting_stats_to_csv(self,file_name:str = 'batting_stats.csv'):
+    def write_batting_stats_to_csv(self,file_name:str = Constants.PLAYER_BATTING_STATS_FILE_NAME):
         csv_writer = CsvWriter(file_path=file_name)
         player_batting_stats = [
             [

@@ -1,3 +1,4 @@
+from utils.constants import Constants
 import time
 import requests
 from models.player_detailed_db import PlayerDetailedDb
@@ -33,7 +34,7 @@ class Repository:
         teams =[]
         for group in groups:
             group_title = str(group.get('title'))
-            if group_title == "POPULAR MEN'S INTERNATIONAL TEAMS":
+            if group_title == Constants.MENS_INTERNATIONAL_TEAMS:
                 teams = group.get('teams')
         return teams
 
@@ -88,14 +89,10 @@ class Repository:
             players_json = list(executor.map(self.get_player_detailed_from_url,urls))
             self.players_json = players_json
 
-    def write_player_short_data(self,file_name = 'player_short.csv'):
+    def write_player_short_data(self,file_name = Constants.PLAYER_SHORT_FILE_NAME):
         '''write the player short data into csv file '''
         for team_players in self.players_short_db:
             team_players.write_csv(file_name = file_name)
-
-
-     
-
 
     # def add_players_detailed_data(self):
     #     '''adds player data into the players_detailed.players variable '''
@@ -107,7 +104,7 @@ class Repository:
     #         print(f"fetched player data for {player_detailed.player_profile.long_name}")
     #         self.players_detailed_db.players.append(player_detailed)
 
-    def get_player_urls(self,file_name = 'players_short.csv'):
+    def get_player_urls(self,file_name = Constants.PLAYER_SHORT_FILE_NAME ):
         df = pd.read_csv(file_name,names=['id','slug','url'])
         return df['url']
 

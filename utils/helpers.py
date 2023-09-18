@@ -23,3 +23,5 @@ def parse_date(json):
         if (year == None or month == None) or day == None:
              return None
         return datetime(year = year, month = month, day= day).date()
+
+
