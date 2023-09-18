@@ -2,3 +2,6 @@
 /.ipynb_checkpoints
 /.jupyter
 **/__pycache__/
+/.batting_stats.csv
+/.bowling_stats.csv
+/.player_profiles.csv
