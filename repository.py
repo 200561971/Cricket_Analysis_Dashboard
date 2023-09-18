@@ -16,6 +16,8 @@ class Repository:
         self.players_short_db = []
         self.players_detailed_db = PlayerDetailedDb()
         self.players_json = []
+        self.player_count = 0
+        self.total_player_count = self.get_total_player_count()
         #self.add_teams_data()
         #self.teams_db.write_csv()
         #self.add_players_short_data()
@@ -23,6 +25,7 @@ class Repository:
         self.get_player_detailed_json()
         self.add_player_detailed_from_json()
         self.write_players_detailed_to_csv()
+        
         
 
 
@@ -71,22 +74,29 @@ class Repository:
         '''get the detailed player data in json format from the url'''
         response = requests.get(url)
         if response.status_code == 200:
-            return json.loads(response.content)
-        
+            self.player_count = self.player_count + 1
+            player = json.loads(response.content)
+            print(f'fetched {self.player_count}/{self.total_player_count} player(s) from the url    ',end='\r')
+            return player 
          
     
     def add_player_detailed_from_json(self):
         if len(self.players_json) == 0:
             print("No players json found :(")
             return
+        print("Parsing Player Json files...")
         for player_json in self.players_json:
             player_detailed = PlayerDetailed.from_json(player_json=player_json)
             self.players_detailed_db.players.append(player_detailed)
+        print("Parsing Complete.")
 
     def get_player_detailed_json(self):
         with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
             urls = self.get_player_urls()
+            print(f"Urls of {self.total_player_count} player(s) available")
+            print("Fetching Player Json from urls...")
             players_json = list(executor.map(self.get_player_detailed_from_url,urls))
+            print("Data fetching complete.")
             self.players_json = players_json
 
     def write_player_short_data(self,file_name = Constants.PLAYER_SHORT_FILE_NAME):
@@ -107,16 +117,25 @@ class Repository:
     def get_player_urls(self,file_name = Constants.PLAYER_SHORT_FILE_NAME ):
         df = pd.read_csv(file_name,names=['id','slug','url'])
         return df['url']
+    
+    def get_total_player_count(self,file_name = Constants.PLAYER_SHORT_FILE_NAME):
+        df = pd.read_csv(file_name,names=['id','slug','url'])
+        return len(df['url'])
 
     def write_players_detailed_to_csv(self):
+        print("Writing data to csv file...")
+        print("Writing headers...")
         PlayerDetailed.write_profile_header()
         PlayerDetailed.write_batting_stats_header()
         PlayerDetailed.write_bowling_stats_header()
         players = self.players_detailed_db.players
+        print("Writing player data to csv...")
         
-        for player in self.players_detailed_db.players:
+        for player in players:
             player.write_profile_to_csv()
             player.write_batting_stats_to_csv()
             player.write_bowling_stats_to_csv()
+
+        print("Successfully created csv files...")
 
 
