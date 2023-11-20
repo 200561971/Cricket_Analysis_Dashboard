@@ -35,7 +35,7 @@ The detailed stats of each player are split into 3 files (player_profiles.csv, b
 The PlayerProfile class is used to store the profile information of a player. It includes attributes such as slug, id, long_name, gender, image_url, headshot_image_url, dob, dod, and country_team_id. The class also includes a static method from_json that creates a PlayerProfile object from a JSON object. The get_player_url method returns the URL of the player’s profile if the slug and id attributes are set.
 ## PlayerBattingFieldingStats Class
 The PlayerBattingFieldingStats class is used to store the batting and fielding stats of a player. It includes attributes such as match_format, matches, innings, notouts, runs, hi_score, average, balls_faced, strike_rate, hundreds, fifties, fours, sixes, catches, and stumps.
-## Conclusion
-This documentation provides a comprehensive guide on how to scrape cricket player data from the ESPN Cricinfo website. By following the steps outlined in this guide, you can successfully scrape and store cricket player data for further analysis or use.
 
+## Running the script  
+You can start scraping data by running the main.py file in the root folder.
 
