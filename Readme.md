@@ -8,26 +8,26 @@ Player URL by ID: https://hs-consumer-api.espncricinfo.com/v1/pages/player/home
 Images Base URL: https://img1.hscicdn.com/image/upload/lsci
 Player Query URL: https://hs-consumer-api.espncricinfo.com/v1/pages/player/search
 CSV Files
-The CSV files are saved in the following locations:
-Player Profile File: data/player_profiles.csv
-Player Batting Stats File: data/batting_stats.csv
-Player Bowling Stats File: data/bowling_stats.csv
-Player Short File: data/players_short.csv
-Teams File: data/teams.csv
+The CSV files are saved in the following locations:  
+Player Profile File: data/player_profiles.csv  
+Player Batting Stats File: data/batting_stats.csv  
+Player Bowling Stats File: data/bowling_stats.csv  
+Player Short File: data/players_short.csv  
+Teams File: data/teams.csv  
 ## Team Data Scraping
-The team data is scraped using the teams_base_api and saved in the teams.csv file which includes the team_id.
-Player Shorts CSV File
-The players_shorts.csv file is scraped using the player_query_url and passing the following parameters and iterating through all the pages.
+The team data is scraped using the teams_base_api and saved in the teams.csv file which includes the team_id.  
+Player Shorts CSV File  
+The players_shorts.csv file is scraped using the player_query_url and passing the following parameters and iterating through all the pages.  
 
-params = {
-    'mode':'BOTH',
-    'page':page_num,
-    'records':records,
-    'filterActive':'false',
-    'filterTeamId': team_id,
-    'filterFormatLevel':"INTERNATIONAL",
-    'sort':'ALPHA_ASC'
-}
+params = {  
+    'mode':'BOTH',  
+    'page':page_num,  
+    'records':records,  
+    'filterActive':'false',  
+    'filterTeamId': team_id,  
+    'filterFormatLevel':"INTERNATIONAL",  
+    'sort':'ALPHA_ASC'  j
+}  
 
 ## Detailed Stats of Each Player
 The detailed stats of each player are split into 3 files (player_profiles.csv, batting_stats.csv, bowling_stats.csv).
